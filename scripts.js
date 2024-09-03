@@ -9,7 +9,7 @@ function getComputerChoice() {
     return 'Scissors';
 }
 
-function getHumanChoice() {
+function getPlayerChoice() {
   let promptMessage = 
     `Select one of the following:
       1.) Rock
@@ -32,3 +32,6 @@ function getHumanChoice() {
       return 'Invalid choice'
   }
 }
+
+let playerScore = 0;
+let computerScore = 0;
