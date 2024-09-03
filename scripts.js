@@ -14,7 +14,8 @@ function getPlayerChoice() {
     `Select one of the following:
       1.) Rock
       2.) Paper
-      3.) Scissors`;
+      3.) Scissors
+      9.) Quit Game`;
 
   let choice = prompt(promptMessage)
 
@@ -28,8 +29,11 @@ function getPlayerChoice() {
     case '3':
       return 'Scissors';
 
+    case '9':
+      return 'Quit';
+
     default:
-      return 'Invalid choice'
+      return 'Invalid choice';
   }
 }
 
@@ -92,6 +96,11 @@ function playGame() {
   while (playerScore < 3 && computerScore < 3) {
     const playerSelection = getPlayerChoice();
     const computerSelection = getComputerChoice();
+
+    if (playerSelection == 'Quit') {
+      console.log('You quit the game.');
+      return;
+    }
     
     playRound(playerSelection, computerSelection);
     console.log('');
