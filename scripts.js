@@ -2,9 +2,33 @@ function getComputerChoice() {
   let choice = Math.random();
 
   if (choice <= 0.33)
-    return 'rock';
+    return 'Rock';
   else if (choice <= 0.67)
-    return 'paper';
+    return 'Paper';
   else
-    return 'scissors';
+    return 'Scissors';
+}
+
+function getHumanChoice() {
+  let promptMessage = 
+    `Select one of the following:
+      1.) Rock
+      2.) Paper
+      3.) Scissors`;
+
+  let choice = prompt(promptMessage)
+
+  switch (choice) {
+    case '1':
+      return 'Rock';
+
+    case '2':
+      return 'Paper';
+
+    case '3':
+      return 'Scissors';
+
+    default:
+      return 'Invalid choice'
+  }
 }
