@@ -15,7 +15,8 @@ function playRound(playerChoice, computerChoice) {
   let roundNumber = resultArea.children.length + 1;
 
   if (playerChoice == computerChoice) {
-    resultParagraph.textContent = `Round ${roundNumber}: It's a tie! Replay the round.`;
+    tieScore++;
+    resultParagraph.textContent = `Round ${roundNumber}: It's a tie! You both chose ${playerChoice}.`;
   }
   else {
     switch (playerChoice) {
@@ -61,9 +62,11 @@ function playRound(playerChoice, computerChoice) {
 
   const scoreArea = document.querySelector("#score");
   const playerScoreText = scoreArea.firstElementChild;
+  const tieScoreText = scoreArea.children[1];
   const computerScoreText = scoreArea.lastElementChild;
 
   playerScoreText.textContent = `Player: ${playerScore}`;
+  tieScoreText.textContent = `Ties: ${tieScore}`;
   computerScoreText.textContent = `Computer: ${computerScore}`;
 
   if (playerScore == 5 || computerScore == 5)
@@ -88,4 +91,5 @@ buttons.forEach((button) => {
 });
 
 let playerScore = 0;
+let tieScore = 0;
 let computerScore = 0;
