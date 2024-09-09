@@ -71,12 +71,19 @@ function playRound(playerChoice, computerChoice) {
 
   if (playerScore == 5 || computerScore == 5)
   {
+    const gameContainer = document.querySelector(".container");
+    gameContainer.style.color = "white";
+
     const gameWinnerText = document.createElement("p");
 
-    if (playerScore == 5)
+    if (playerScore == 5) {
+      gameContainer.style.backgroundColor = "#005a00";
       gameWinnerText.textContent = "Congratulations! You won the game!";
-    else
+    }
+    else {
+      gameContainer.style.backgroundColor = "#960000";
       gameWinnerText.textContent = "You lost the game. Better luck next time!";
+    }
 
     resultArea.insertBefore(gameWinnerText, resultArea.firstChild);
   }
