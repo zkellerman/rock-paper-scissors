@@ -65,12 +65,25 @@ function playRound(playerChoice, computerChoice) {
 
   playerScoreText.textContent = `Player: ${playerScore}`;
   computerScoreText.textContent = `Computer: ${computerScore}`;
+
+  if (playerScore == 5 || computerScore == 5)
+  {
+    const gameWinnerText = document.createElement("p");
+
+    if (playerScore == 5)
+      gameWinnerText.textContent = "Congratulations! You won the game!";
+    else
+      gameWinnerText.textContent = "You lost the game. Better luck next time!";
+
+    resultArea.appendChild(gameWinnerText);
+  }
 }
 
 const buttons = document.querySelectorAll("button");
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    playRound(button.textContent, getComputerChoice());
+    if (playerScore < 5 && computerScore < 5)
+      playRound(button.textContent, getComputerChoice());
   });
 });
 
