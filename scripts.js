@@ -10,95 +10,69 @@ function getComputerChoice() {
 }
 
 function playRound(playerChoice, computerChoice) {
-  console.log(`You chose: ${playerChoice}`);
-  console.log(`Computer chose: ${computerChoice}`);
+  const resultArea = document.querySelector("#results");
+  const resultParagraph = document.createElement("p");
+  let roundNumber = resultArea.children.length + 1;
 
   if (playerChoice == computerChoice) {
-    console.log("It's a tie! Replay the round.");
-    return;
+    resultParagraph.textContent = `Round ${roundNumber}: It's a tie! Replay the round.`;
   }
+  else {
+    switch (playerChoice) {
+      case 'Rock':
+        if (computerChoice == 'Paper') {
+          computerScore++;
+          resultParagraph.textContent = `Round ${roundNumber}: You lose! Paper beats Rock.`;
+        }
+        else if (computerChoice == 'Scissors') {
+          playerScore++;
+          resultParagraph.textContent = `Round ${roundNumber}: You win! Rock beats Scissors`;
+        }
 
-  switch (playerChoice) {
-    case 'rock':
-      if (computerChoice == 'Paper') {
-        console.log('You lose! Paper beats Rock.');
-        //computerScore++;
-      }
-      else if (computerChoice == 'Scissors') {
-        console.log('You win! Rock beats Scissors');
-        //playerScore++;
-      }
+        break;
 
-      break;
+      case 'Paper':
+        if (computerChoice == 'Rock') {
+          playerScore++;
+          resultParagraph.textContent = `Round ${roundNumber}: You win! Paper beats Rock.`;
+        }
+        else if (computerChoice == 'Scissors') {
+          computerScore++;
+          resultParagraph.textContent = `Round ${roundNumber}: You lose! Scissors beats Paper.`;
+        }
 
-    case 'paper':
-      if (computerChoice == 'Rock') {
-        console.log('You win! Paper beats Rock.');
-        //playerScore++;
-      }
-      else if (computerChoice == 'Scissors') {
-        console.log('You lose! Scissors beats Paper.');
-        //computerScore++;
-      }
+        break;
 
-      break;
+      case 'Scissors':
+        if (computerChoice == 'Rock') {
+          computerScore++;
+          resultParagraph.textContent = `Round ${roundNumber}: You lose! Rock beats Scissors`;
+        }
+        else if (computerChoice == 'Paper') {
+          playerScore++;
+          resultParagraph.textContent = `Round ${roundNumber}: You win! Scissors beats Paper`;
+        }
 
-    case 'scissors':
-      if (computerChoice == 'Rock') {
-        console.log('You lose! Rock beats Scissors');
-        //computerScore++;
-      }
-      else if (computerChoice == 'Paper') {
-        console.log('You win! Scissors beats Paper');
-        //playerScore++;
-      }
-
-      break;
-
-    default:
-      console.log('You entered an invalid choice. Replay the round.');
-      break;
-  }
-}
-
-function playGame() {
-  let playerScore = 0;
-  let computerScore = 0;
-
-  while (playerScore < 3 && computerScore < 3) {
-    const playerSelection = getPlayerChoice();
-    const computerSelection = getComputerChoice();
-
-    if (playerSelection == 'Quit') {
-      console.log('You quit the game.');
-      return;
+        break;
     }
-    
-    playRound(playerSelection, computerSelection);
-    console.log('');
-
-    if (playerScore == 3 || computerScore == 3)
-      break;
-
-    if (playerScore > computerScore)
-      console.log(`You're winning! The score is ${playerScore} - ${computerScore}.`);
-    else if (playerScore < computerScore)
-      console.log(`You're losing. The score is ${playerScore} - ${computerScore}.`);
-    else
-      console.log(`The score is tied ${playerScore} - ${computerScore}.`);
-
-    console.log('');
   }
 
-  if (playerScore == 3)
-    console.log(`Congratulations! You won the game ${playerScore} - ${computerScore}.`);
-  else
-    console.log(`Better luck next time! You lost the game ${playerScore} - ${computerScore}.`);
+  resultArea.appendChild(resultParagraph);
+
+  const scoreArea = document.querySelector("#score");
+  const playerScoreText = scoreArea.firstElementChild;
+  const computerScoreText = scoreArea.lastElementChild;
+
+  playerScoreText.textContent = `Player: ${playerScore}`;
+  computerScoreText.textContent = `Computer: ${computerScore}`;
 }
 
 const buttons = document.querySelectorAll("button");
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    playRound(button.id, getComputerChoice());
+    playRound(button.textContent, getComputerChoice());
   });
 });
+
+let playerScore = 0;
+let computerScore = 0;
