@@ -9,87 +9,59 @@ function getComputerChoice() {
     return 'Scissors';
 }
 
-function getPlayerChoice() {
-  let promptMessage = 
-    `Select one of the following:
-      1.) Rock
-      2.) Paper
-      3.) Scissors
-      9.) Quit Game`;
+function playRound(playerChoice, computerChoice) {
+  console.log(`You chose: ${playerChoice}`);
+  console.log(`Computer chose: ${computerChoice}`);
 
-  let choice = prompt(promptMessage)
+  if (playerChoice == computerChoice) {
+    console.log("It's a tie! Replay the round.");
+    return;
+  }
 
-  switch (choice) {
-    case '1':
-      return 'Rock';
+  switch (playerChoice) {
+    case 'rock':
+      if (computerChoice == 'Paper') {
+        console.log('You lose! Paper beats Rock.');
+        //computerScore++;
+      }
+      else if (computerChoice == 'Scissors') {
+        console.log('You win! Rock beats Scissors');
+        //playerScore++;
+      }
 
-    case '2':
-      return 'Paper';
+      break;
 
-    case '3':
-      return 'Scissors';
+    case 'paper':
+      if (computerChoice == 'Rock') {
+        console.log('You win! Paper beats Rock.');
+        //playerScore++;
+      }
+      else if (computerChoice == 'Scissors') {
+        console.log('You lose! Scissors beats Paper.');
+        //computerScore++;
+      }
 
-    case '9':
-      return 'Quit';
+      break;
+
+    case 'scissors':
+      if (computerChoice == 'Rock') {
+        console.log('You lose! Rock beats Scissors');
+        //computerScore++;
+      }
+      else if (computerChoice == 'Paper') {
+        console.log('You win! Scissors beats Paper');
+        //playerScore++;
+      }
+
+      break;
 
     default:
-      return 'Invalid choice';
+      console.log('You entered an invalid choice. Replay the round.');
+      break;
   }
 }
 
 function playGame() {
-  function playRound(playerChoice, computerChoice) {
-    console.log(`You chose: ${playerChoice}`);
-    console.log(`Computer chose: ${computerChoice}`);
-  
-    if (playerChoice == computerChoice) {
-      console.log("It's a tie! Replay the round.");
-      return;
-    }
-  
-    switch (playerChoice) {
-      case 'Rock':
-        if (computerChoice == 'Paper') {
-          console.log('You lose! Paper beats Rock.');
-          computerScore++;
-        }
-        else if (computerChoice == 'Scissors') {
-          console.log('You win! Rock beats Scissors');
-          playerScore++;
-        }
-  
-        break;
-  
-      case 'Paper':
-        if (computerChoice == 'Rock') {
-          console.log('You win! Paper beats Rock.');
-          playerScore++;
-        }
-        else if (computerChoice == 'Scissors') {
-          console.log('You lose! Scissors beats Paper.');
-          computerScore++;
-        }
-  
-        break;
-  
-      case 'Scissors':
-        if (computerChoice == 'Rock') {
-          console.log('You lose! Rock beats Scissors');
-          computerScore++;
-        }
-        else if (computerChoice == 'Paper') {
-          console.log('You win! Scissors beats Paper');
-          playerScore++;
-        }
-  
-        break;
-  
-      default:
-        console.log('You entered an invalid choice. Replay the round.');
-        break;
-    }
-  }
-
   let playerScore = 0;
   let computerScore = 0;
 
@@ -124,4 +96,9 @@ function playGame() {
     console.log(`Better luck next time! You lost the game ${playerScore} - ${computerScore}.`);
 }
 
-playGame();
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    playRound(button.id, getComputerChoice());
+  });
+});
