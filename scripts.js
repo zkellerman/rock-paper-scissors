@@ -57,7 +57,7 @@ function playRound(playerChoice, computerChoice) {
     }
   }
 
-  resultArea.appendChild(resultParagraph);
+  resultArea.insertBefore(resultParagraph, resultArea.firstChild);
 
   const scoreArea = document.querySelector("#score");
   const playerScoreText = scoreArea.firstElementChild;
@@ -75,7 +75,7 @@ function playRound(playerChoice, computerChoice) {
     else
       gameWinnerText.textContent = "You lost the game. Better luck next time!";
 
-    resultArea.appendChild(gameWinnerText);
+    resultArea.insertBefore(gameWinnerText, resultArea.firstChild);
   }
 }
 
